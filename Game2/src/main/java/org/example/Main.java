@@ -14,7 +14,7 @@ public class Main {
         field = initializeGame();
     }
 
-    public void Run() {
+    public void run() {
         while (isMoveAvailable()) {
             System.out.println(formatGame());
 
@@ -120,6 +120,6 @@ public class Main {
 
     public static void main(String[] args) {
         Main game = new Main();
-        game.Run();
+        game.run();
     }
 }
