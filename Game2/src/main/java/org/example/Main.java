@@ -3,12 +3,9 @@ package org.example;
 import java.io.IOException;
 
 public class Main {
-    private enum Cell {
-        X, O, EMPTY
-    }
     private int moveNumber = 0;
 
-    private Cell[][] field;
+    public Cell[][] field;
 
     public Main() {
         field = initializeGame();
@@ -52,15 +49,12 @@ public class Main {
 
             move(rawValue, colValue);
 
-        } catch (IOException ie) {
-            System.out.println(ie.toString());
-//            ie.printStackTrace();
-        } catch (IllegalArgumentException iae) {
-            System.out.println(iae.toString());
+        } catch (IOException | IllegalArgumentException ie) {
+            System.out.println(ie.getMessage());
         }
     }
 
-    private void move(int raw, int col) {
+    public void move(int raw, int col) {
         if (field[raw][col] != Cell.EMPTY) throw new IllegalArgumentException("Occupied cell");
         field[raw][col] = (moveNumber % 2 == 0 ? Cell.X : Cell.O);
         moveNumber++;
@@ -81,7 +75,7 @@ public class Main {
         return board.toString();
     }
 
-    private boolean isMoveAvailable() {
+    public boolean isMoveAvailable() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (field[i][j] == Cell.EMPTY) {
@@ -92,7 +86,7 @@ public class Main {
         return false;
     }
 
-    private Cell checkWin() {
+    public Cell checkWin() {
         // rows
         for (int i = 0; i < 3; i++) {
             if (field[i][0] != Cell.EMPTY && field[i][0] == field[i][1] && field[i][1] == field[i][2]) {
